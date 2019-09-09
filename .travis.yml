@@ -1,9 +1,11 @@
+language: generic 
 sudo: required
 services:
   - docker
 
 before_install:
-  - docker build -t agabzdyl/react-test -f ./client/Dockerfile.dev ./client #look into the client directory to get the build context
+  #look into the client directory to get the build context
+  - docker build -t agabzdyl/react-test -f ./client/Dockerfile.dev ./client 
 
 script:
   - script:
