@@ -18,6 +18,7 @@ after_success:
   - docker build -t agabzdyl/multi-worker ./worker
   #log in to docker ci (need to be added on docker ci as env variables)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
   #take images and push to docker hub
   - docker push linguinyjo/multi-client
   - docker push linguinyjo/multi-nginx 
