@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t agabzdyl/react-test -f ./client/Dockerfile.dev ./client #look into the client directory to get the build context
+
+script:
+  - script:
+    - docker run -e CI=true agabzdyl/react-test npm test
+
+#after tests are successful, create all of our docker images and push them off
+after_success:
+  - docker build -t agabzdyl/multi-client ./client
+  - docker build -t agabzdyl/multi-nginx ./nginx
+  - docker build -t agabzdyl/multi-server ./server
+  - docker build -t agabzdyl/multi-worker ./worker
+  #log in to docker ci (need to be added on docker ci as env variables)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #take images and push to docker hub
+  - docker push agabzdyl/multi-client
+  - docker push agabzdyl/multi-nginx 
+  - docker push agabzdyl/multi-server
+  - docker push agabzdyl/multi-worker
+
