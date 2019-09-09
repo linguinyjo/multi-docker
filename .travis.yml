@@ -19,8 +19,8 @@ after_success:
   #log in to docker ci (need to be added on docker ci as env variables)
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #take images and push to docker hub
-  - docker push agabzdyl/multi-client
-  - docker push agabzdyl/multi-nginx 
-  - docker push agabzdyl/multi-server
-  - docker push agabzdyl/multi-worker
+  - docker push linguinyjo/multi-client
+  - docker push linguinyjo/multi-nginx 
+  - docker push linguinyjo/multi-server
+  - docker push linguinyjo/multi-worker
 
